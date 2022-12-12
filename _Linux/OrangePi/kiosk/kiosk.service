@@ -1,0 +1,16 @@
+[Unit]
+Description=Chromium Kiosk
+Wants=graphical.target
+After=graphical.target
+ 
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+Type=simple
+ExecStart=/bin/bash /home/pi/app/ve_data_log/_Linux/OrangePi/kiosk/kiosk.sh
+Restart=on-abort
+User=orangepi
+Group=orangepi
+ 
+[Install]
+WantedBy=graphical.target

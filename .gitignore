@@ -1,0 +1,9 @@
+*.zip
+*.pyc
+*.exe
+media/*.jpeg
+media/*.jpg
+media/*.bmp
+media/*.png
+.vscode
+venv
