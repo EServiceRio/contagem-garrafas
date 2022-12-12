@@ -7,7 +7,7 @@ After=graphical.target
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/pi/.Xauthority
 Type=simple
-ExecStart=/bin/bash /home/pi/app/ve_data_log/_Linux/Raspbarry/kiosk/kiosk.sh
+ExecStart=/bin/bash /home/pi/app/contagem-garrafas/_Linux/Raspbarry/kiosk/kiosk.sh
 Restart=on-abort
 User=pi
 Group=pi

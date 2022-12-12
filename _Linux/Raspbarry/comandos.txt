@@ -12,7 +12,7 @@ pip install virtualenv
 
 navegue ate a pasta onde esta server desejado para a instalação:
 
-exemplo: cd /home/pi/app/ve_data_log/serverContagem
+exemplo: cd /home/pi/app/contagem-garrafas/serverContagem
 
 se dentro dessa pasta não tiver uma pasta chamada media, crie uma vazia com esse nome
 
@@ -38,7 +38,7 @@ navegue no prompt ate a pasta onde encontra-se esses arquivos,
 
 forneça acesso de administrador ao arquivo .sh:
 
-"sudo chmod 777 ve.sh
+"sudo chmod 777 contagem.sh
 
 depois mova o arquivo .service para a pasta /etc/systemd/system:
 
@@ -46,5 +46,5 @@ sudo cp ve.service /etc/systemd/system
 
 depois abilite o serviço para iniciar junto do sistema:
 
-sudo systemctl enable ve
+sudo systemctl enable contagem
 

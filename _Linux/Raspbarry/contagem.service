@@ -1,0 +1,10 @@
+[Unit]
+Description = Systema contagem de garrafas retornaveis
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/home/pi/app/contagem-garrafas/_Linux/Raspbarry/contagem.sh
+
+[Install]
+WantedBy=multi-user.target

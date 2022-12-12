@@ -1,0 +1,10 @@
+[Unit]
+Description = sistema de contagem de garrafas retornaveis em caixa
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/home/orangepi/app/contagem-garrafas/_Linux/OrangePi/contagem.sh
+
+[Install]
+WantedBy=multi-user.target

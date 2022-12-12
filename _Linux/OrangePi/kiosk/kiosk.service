@@ -7,7 +7,7 @@ After=graphical.target
 Environment=DISPLAY=:0
 Environment=XAUTHORITY=/home/pi/.Xauthority
 Type=simple
-ExecStart=/bin/bash /home/pi/app/ve_data_log/_Linux/OrangePi/kiosk/kiosk.sh
+ExecStart=/bin/bash /home/pi/app/contagem-garrafas/_Linux/OrangePi/kiosk/kiosk.sh
 Restart=on-abort
 User=orangepi
 Group=orangepi
