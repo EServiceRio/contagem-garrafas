@@ -4,11 +4,13 @@ primeiro crie uma pasta na raiz do usuario com nome de app:
 
 mkdir app
 
-cole a pasta da aplicação nessa pasta.
+cole a pasta da aplicação nessa pasta:
+
+sudo git clone https://github.com/EServiceRio/contagem-garrafas.git
 
 instale o virtualenv:
 
-pip install virtualenv
+sudo apt-get install virtualenv
 
 navegue ate a pasta onde esta server desejado para a instalação:
 
@@ -16,35 +18,81 @@ exemplo: cd /home/pi/app/contagem-garrafas/serverContagem
 
 se dentro dessa pasta não tiver uma pasta chamada media, crie uma vazia com esse nome
 
+De permissão de administrador para a pasta do server:
+
+sudo chmod 777 /home/pi/app/contagem-garrafas/serverContagem
+
 crie a pasta do ambiente virtual:
 
-sudo virtualenv venv.
+sudo virtualenv venv
 
 ative o ambiente virtual:
 
-.venv/bin/activate
+. venv/bin/activate
 
 instale os pacotes:
 
 pip install django django-stdimage django-bootstrap4 pymodbustcp
 
+Primeira configuração do supervisorio.
+
+navegue ate o arquivo /home/pi/app/contagem-garrafas/serverContagem/config/views.py
+comente as linhas:
+from .drive import *
+from .ve_cont_garrafas import *
+from .ve_cont_garrafas import camera as zerarfunc
+
+crie o banco de dados relacional:
+
+python /home/pi/app/contagem-garrafas/serverContagem/manage.py migrate
+
+crie o super usuário:
+
+python /home/pi/app/contagem-garrafas/serverContagem/manage.py createsuperuser
+
+e siga os passos no prompt.
+
+acesse no navegador a pagina do admin:
+
+http://localhost:8000/admin
+
+crie uma camera e um usuario.
+
+navegue ate o arquivo /home/pi/app/contagem-garrafas/serverContagem/config/views.py
+retire os comentarios das linhas:
+from .drive import *
+from .ve_cont_garrafas import *
+from .ve_cont_garrafas import camera as zerarfunc
+
+
 teste a execução do supervisorio pelo ambiente virtual, 
 se tudo estiver ok passar para a proxima etapa.
+
+python manage.py runserver 0.0.0.0:8000
 
 
 --> instalando o serviço:
 
 navegue no prompt ate a pasta onde encontra-se esses arquivos,
 
+/home/pi/app/contagem-garrafas/_Linux/Raspbarry
+
 forneça acesso de administrador ao arquivo .sh:
 
-"sudo chmod 777 contagem.sh
+sudo chmod 777 contagem.sh
 
 depois mova o arquivo .service para a pasta /etc/systemd/system:
 
-sudo cp ve.service /etc/systemd/system
+sudo cp contagem.service /etc/systemd/system
 
 depois abilite o serviço para iniciar junto do sistema:
 
 sudo systemctl enable contagem
+
+inicie o serviço:
+
+sudo systemctl start contagem
+
+instale o servico do kiosk agora.
+
 
