@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import CameraView, CameraIndexView, HistoricoView
 from .views import CameraJson, CamerasJson, CameraZera, ImageView
+from .views import CameraVisionCall
 
 
 urlpatterns = [
@@ -11,5 +12,6 @@ urlpatterns = [
     path('hist/<int:valor>/', HistoricoView.as_view(), name='historico'),
     path('image/<int:valor>/', ImageView.as_view(), name = "image"),
     path('camerajson/<int:valor>/', CameraJson.as_view()),
-    path('camerasjson/',CamerasJson.as_view())
+    path('camerasjson/',CamerasJson.as_view()),
+    path('visionmanage/',CameraVisionCall.as_view())
 ]

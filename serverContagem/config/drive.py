@@ -201,6 +201,37 @@ try:
     print(f'retorno do relogio: {comando}')
 except Exception as ex:
     print(f'falha em set do relogio: {str(ex)}')
+    
+def cicloLimpaMemoria():
+    print("\rIniciou o limpa memoria\r")
+    try:
+        cameras = Camera.objects.all()
+        imagens = Imagem.objects.all()
+        imgs = []
+        buffer = []
+        for cam in cameras:
+            buffer.append(50000)
+            imgs.append(Imagem.objects.all().filter(camera=cam))
+        index = 0
+        for conj in imgs:
+            print(f"quantidade de imagens: {len(conj)}, memoria: {buffer[index]}")
+            if len(conj)>buffer[index]:
+                qtd = len(conj)-buffer[index]
+                qtdIndex = 0
+                for im in conj:
+                    if qtdIndex < qtd:
+                        print(f"Apagando: - {im.img}")
+                        try:
+                            imagens.get(id=im.id).delete()
+                            os.remove(im.img)
+                        except:
+                            pass
+                    else:
+                        print(f"{im.img}")
+                    qtdIndex = qtdIndex+1
+            index=index+1
+    except Exception as ex:
+        print(f"falha no ciclo de deletar imagens: {str(ex)}")
 
 t_main = threading.Thread(target=mainCicle).start()
 

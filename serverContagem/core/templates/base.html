@@ -28,6 +28,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'cameras' %}">Câmeras</a>
                     </li>
+					<li class="nav-item">
+						<button id="vision" class="btn btn-block btn-primary" type="button" onclick="chamaVision()">
+							Vision Manage
+						</button>
+					<li class="nav-item">
                 </ul>
             </div>            
             {% if titulo != 'Login' %}
@@ -75,6 +80,33 @@
             for (i in c)
                 document.cookie = /^[^=]+/.exec(c[i])[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
             //document.location.href='/login'
+        }
+		
+		async function chamaVision(){
+            var retor = await fetch("/cameras/visionmanage",{
+            }).then(response=>{
+                if(response.status===200){
+                    return response.text()
+                }else{
+                    this.erro = true
+                    if(response.status===401){throw "Você não tem Autorização"}
+                    else if(response.status===404){throw "Dados Inexistentes"}
+                    else{throw "erro no api do servidor"}
+                }          
+            }).then(res=>{
+                if(res!==undefined){
+                    if (res==="ok"){
+                        toastr.success("Ação executada", "Sucesso")
+                    }
+                    else{
+                        toastr.error("não foi possível executar a ação", "Falha")
+                    }
+                }else{
+                    throw "erro no api do servidor"
+                }
+            }).catch(erro=>{
+                console.log(erro)
+            });
         }
     </script>
 

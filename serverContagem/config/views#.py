@@ -9,13 +9,20 @@ from .models import Camera, Imagem
 from threading import Thread
 from django.db.models import Q
 from pyModbusTCP.client import ModbusClient as Modbus
+import os
 
 
+
+class CameraVisionCall(View):
+    def get(self,request):
+        os.system("vision.cmd")
+        return HttpResponse('ok')
 
 class CameraZera(View):
     def get(self,request):
         try:
             zerarfunc.zerar()
+            t_limpa = Thread(target=cicloLimpaMemoria).start()
             return HttpResponse('ok')
         except Exception as ex:
             print(f'falha em zerar... - {str(ex)}')
